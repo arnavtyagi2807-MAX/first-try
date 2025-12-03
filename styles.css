@@ -1,20 +1,45 @@
-/* This is a CSS comment */
+/* --- CSS GRID: Defining the Page Structure (The Macro Layout) --- */
+.page-grid {
+    display: grid; /* Activate Grid for the main content area */
+    
+    /* Define 2 columns: 
+       - 1st column (sidebar) is fixed at 200px wide.
+       - 2nd column (main content) takes up the rest of the available space (1fr). */
+    grid-template-columns: 200px 1fr; 
+    gap: 20px; /* Space between the columns */
+    padding: 20px;
+}
 
-body {
-    background-color: #cccccc; /* Light grey background */
-    font-family: Arial, sans-serif;
+#page-header, #page-footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
     text-align: center;
-    padding-top: 50px;
 }
 
-h1 {
-    color: #333333; /* Dark grey heading text */
-    border-bottom: 2px solid #5cb85c;
-    display: inline-block;
-    padding-bottom: 10px;
+#sidebar {
+    background-color: #e0f7fa; /* Light blue */
+    padding: 15px;
+    border-radius: 5px;
 }
 
-.intro {
-    color: #5cb85c; /* Green text for the paragraph with class="intro" */
-    font-size: 1.2em;
+#main-content {
+    background-color: #fff3e0; /* Light orange */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* --- FLEXBOX: Aligning Content Inside the Sidebar (The Micro Layout) --- */
+#sidebar {
+    /* To use Flexbox on the sidebar's children, we define the sidebar as the container */
+    display: flex; 
+    
+    /* Stack the items vertically */
+    flex-direction: column; 
+    
+    /* Push the sidebar link to the very bottom of the sidebar */
+    justify-content: space-between; 
+    
+    /* Give the sidebar a minimum height so we can see the spacing */
+    min-height: 200px; 
 }
