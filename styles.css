@@ -1,0 +1,20 @@
+/* This is a CSS comment */
+
+body {
+    background-color: #cccccc; /* Light grey background */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+}
+
+h1 {
+    color: #333333; /* Dark grey heading text */
+    border-bottom: 2px solid #5cb85c;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.intro {
+    color: #5cb85c; /* Green text for the paragraph with class="intro" */
+    font-size: 1.2em;
+}
