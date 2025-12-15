@@ -112,7 +112,10 @@ header#header.scrolled {
     text-decoration: none !important;
 }
 
-.logo span { color: var(--accent); } /* Orange accent for 'CORP' */
+/* Change 'CORP.' from Orange to Blue */
+.logo span {
+    color: var(--primary) !important; /* Forces it to use the Electric Blue color */
+}
 
 /* LOGO IMAGE BLEND */
 .nav-logo-icon {
@@ -290,7 +293,7 @@ nav a:hover::after, nav a.active::after { width: 100%; }
     <div class="container nav-wrapper">
         <a href="index.html" class="logo">
             <img src="portfolio/logo.png" alt="IFuture Logo" class="nav-logo-icon">
-            <div>IFUTURE <span>CORP.</span></div>
+            <div>IFUTURE <span>CORPORATION</span></div>
         </a>
         
         <nav>
@@ -827,7 +830,7 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 
     <footer>
         <div class="container">
-            <a href="#" class="logo">IFUTURE <span>CORP.</span></a>
+            <a href="#" class="logo">IFUTURE <span>CORPORATION</span></a>
             <p class="copyright">© 2011-2025 IFuture Corporation. All Rights Reserved.</p>
         </div>
     </footer>
