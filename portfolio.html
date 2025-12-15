@@ -6,820 +6,735 @@
     <title>Portfolio | IFuture Corporation</title>
     <meta name="description" content="IFUTURE CORPORATION Portfolio - Government projects, Scrapers, and Web Development.">
 
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* =========================================
+           VARIABLES & RESET
+           ========================================= */
 
-        /* Update Project Heading Size */
-.project-card .content-box h3, 
-.project-card .content-box h3 a {
-    font-size: 1.9rem;  /* Increased from default */
-    font-weight: 700;   /* Make it bold */
-    line-height: 1.3;
-    margin-bottom: 12px;
-}
-
-/* Update Project Description Size */
-.project-card .project-desc {
-    font-size: 1.3rem;  /* Increased for better readability */
-    line-height: 1.6;   /* Adds breathing room between lines */
-    color: #cbd5e1;     /* Ensures text is readable against dark bg */
-}
-
-/* =========================================
-   1. CORE THEME (MATCHING INDEX.HTML)
-   ========================================= */
-:root {
-    /* DARK THEME COLORS (From Main Page) */
-    --bg-dark: #0B1116;       
-    --bg-card: #151b23;       
-    --bg-darker: #010409;     
-
-    /* LOGO COLORS (Blue & Orange) */
-    --primary: #00A3FF;       
-    --primary-glow: rgba(0, 163, 255, 0.4);
-    --accent: #FF6B00;        
-    --accent-glow: rgba(255, 107, 0, 0.4);
-
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --font-main: 'Outfit', sans-serif;
-    --font-tech: 'Space Grotesk', sans-serif;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-/* FORCE DARK BACKGROUND */
-body { 
-    background-color: var(--bg-dark); 
-    color: var(--text-main); 
-    font-family: var(--font-main); 
-    line-height: 1.6; 
-    overflow-x: hidden; 
-}
-
-h1, h2, h3, h4 { font-family: var(--font-tech); color: white; }
-a { text-decoration: none; transition: 0.3s ease; }
-ul { list-style: none; }
-img { width: 100%; display: block; }
-
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-.section-padding { padding: 80px 0; }
-.text-gradient {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-}
-
-/* =========================================
-   2. HEADER STYLES (EXACT COPY FROM INDEX)
-   ========================================= */
-header#header {
+         body::before {
+    content: "";
     position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 20px 0;
-    transition: 0.4s;
-    /* Dark Blue tint to match logo background */
-    background: rgba(12, 27, 59, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(rgba(2, 6, 23, 0.65), rgba(2, 6, 23, 0.65)), url(https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-header#header.scrolled {
-    background: rgba(12, 27, 59, 0.95);
-    padding: 10px 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-}
-
-.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-
-/* LOGO STYLING */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.8rem;
-    font-weight: 800;
-    font-family: var(--font-tech);
-    color: white !important;
-    letter-spacing: -1px;
-    text-decoration: none !important;
-}
-
-/* Change 'CORP.' from Orange to Blue */
-.logo span {
-    color: var(--primary) !important; /* Forces it to use the Electric Blue color */
-}
-
-/* LOGO IMAGE BLEND */
-.nav-logo-icon {
-    height: 45px;
-    width: auto;
-    border-radius: 6px;
-    mix-blend-mode: lighten; /* Blends black bg into the blue header */
-}
-
-/* NAVIGATION LINKS */
-nav ul { display: flex; gap: 30px; }
-
-nav a {
-    color: var(--text-muted) !important;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    position: relative;
-    font-family: var(--font-main);
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    bottom: -5px;
-    left: 0;
-    transition: 0.3s;
-}
-
-nav a:hover, nav a.active { color: white !important; }
-nav a:hover::after, nav a.active::after { width: 100%; }
-
-/* HAMBURGER */
-.hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
-/* MOBILE RESPONSIVENESS */
-@media (max-width: 768px) {
-    .nav-wrapper nav { display: none; }
-    .hamburger { display: block !important; }
-}
-
-/* =========================================
-   3. PORTFOLIO GRID STYLES
-   ========================================= */
-.page-header {
-    padding-top: 150px;
-    padding-bottom: 60px;
-    text-align: center;
-    /* Updated gradient to match Blue/Orange theme */
-    background: radial-gradient(circle at center top, rgba(0, 163, 255, 0.15), transparent 70%);
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px 0 100px 0;
-}
-
-.category-header {
-    grid-column: 1 / -1;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.category-header h3 {
-    font-size: 1.5rem;
-    border-left: 4px solid var(--accent);
-    padding-left: 15px;
-}
-
-/* Project Card Styles */
-.grid-item { position: relative; height: 320px; z-index: 1; }
-.grid-item:hover { z-index: 1000; }
-
-.project-card {
-    position: absolute; top: 0; left: 50%; width: 100%;
-    transform: translateX(-50%);
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    height: 100%; display: flex; flex-direction: column;
-}
-
-.grid-item:hover .project-card {
-    height: auto; min-height: 100%; width: 115%;
-    transform: translateX(-50%) translateY(-10px);
-    background: #1e293b;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.9);
-    border-color: var(--primary);
-}
-
-.img-box { height: 180px; width: 100%; overflow: hidden; position: relative; }
-.img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.badge {
-    position: absolute; top: 10px; right: 10px; padding: 4px 10px;
-    border-radius: 4px; font-size: 0.7rem; font-weight: bold; color: white;
-    background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
-}
-
-.content-box { padding: 20px; }
-.content-box h3 { font-size: 1.2rem; margin-bottom: 10px; color: white; }
-
-.project-desc {
-    font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;
-    max-height: 60px; overflow: hidden; transition: 0.3s;
-}
-
-/* Add this to your style block */
-.project-desc ul {
-    list-style-type: none; /* Removes default big bullets */
-    padding-left: 0;
-    margin-top: 10px;
-}
-
-.project-desc li {
-    position: relative;
-    padding-left: 15px;
-    margin-bottom: 6px;
-}
-
-/* Adds a custom colored bullet point */
-.project-desc li::before {
-    content: "•";
-    color: var(--primary); /* Uses your Electric Blue */
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
-.project-desc strong {
-    color: white; /* Makes the feature names bright white */
-    font-weight: 600;
-}
-
-.grid-item:hover .project-desc { max-height: 500px; margin-bottom: 15px; }
-
-.tech-row {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;
-    opacity: 0; max-height: 0; transition: 0.3s;
-}
-.grid-item:hover .tech-row { opacity: 1; max-height: 100px; }
-
-.tech-pill {
-    font-size: 0.7rem; color: var(--primary);
-    background: rgba(0, 163, 255, 0.1);
-    padding: 4px 10px; border-radius: 4px;
-    border: 1px solid rgba(0, 163, 255, 0.2);
-}
-</style>
-</head>
-
-<script>
-    // Sticky Header Effect
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        :root {
+            --bg-dark: #0B1116;       
+            --bg-card: #151b23;       
+            --bg-darker: #010409;     
+            --primary: #00A3FF;       
+            --primary-glow: rgba(0, 163, 255, 0.4);
+            --accent: #FF6B00;        
+            --accent-glow: rgba(255, 107, 0, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-main: 'Outfit', sans-serif;
+            --font-tech: 'Space Grotesk', sans-serif;
+            
+            /* Badge Colors */
+            --badge-orange: #ea580c;
+            --badge-blue: #3b82f6;
+            --badge-green: #10b981;
+            --badge-pink: #ec4899;
         }
-    });
-</script>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: var(--font-main); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-tech); color: white; }
+        a { text-decoration: none; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { width: 100%; display: block; }
+
+        /* Utilities */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .section-padding { padding: 8px 0; }
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;
+        }
+        .text-muted { color: var(--text-muted); }
+
+        /* Badge Color Utilities (Replaces Inline Styles) */
+        .bg-orange { background: var(--badge-orange); }
+        .bg-blue { background: var(--badge-blue); }
+        .bg-green { background: var(--badge-green); }
+        .bg-pink { background: var(--badge-pink); }
+        .border-primary { border-color: var(--primary) !important; }
+        .border-green { border-color: var(--badge-green) !important; }
+        .border-pink { border-color: var(--badge-pink) !important; }
+
+        /* =========================================
+           HEADER
+           ========================================= */
+        header#header {
+            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 0; transition: 0.4s;
+            background: rgba(12, 27, 59, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        header#header.scrolled { padding: 10px 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
+
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex; align-items: center; gap: 15px; font-size: 1.8rem;
+            font-weight: 800; font-family: var(--font-tech); color: white !important; letter-spacing: -1px;
+        }
+        .logo span { color: var(--primary) !important; }
+        .nav-logo-icon { height: 45px; width: auto; border-radius: 6px; mix-blend-mode: lighten; }
+
+        nav ul { display: flex; gap: 30px; }
+        nav a {
+            color: var(--text-muted) !important; font-size: 0.9rem; font-weight: 500;
+            text-transform: uppercase; position: relative; font-family: var(--font-main);
+        }
+        nav a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            background: var(--primary); bottom: -5px; left: 0; transition: 0.3s;
+        }
+        nav a:hover, nav a.active { color: white !important; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* =========================================
+           PORTFOLIO GRID & CARDS
+           ========================================= */
+        .page-header {
+            padding-top: 150px;  text-align: center;
+            background: radial-gradient(circle at center top, rgba(0, 163, 255, 0.15), transparent 70%);
+        }
+
+        .grid-3 {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; padding: 20px 0 100px 0;
+        }
+
+        .category-header {
+            grid-column: 1 / -1;  margin-bottom: 20px;
+            padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .category-header h3 { font-size: 1.5rem; border-left: 4px solid var(--accent); padding-left: 15px; }
+
+        .grid-item { position: relative; height: 320px; z-index: 1; }
+        .grid-item:hover { z-index: 1000; }
+
+        .project-card {
+            position: absolute; top: 0; left: 50%; width: 100%;
+            transform: translateX(-50%); background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px;
+            overflow: hidden; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%; display: flex; flex-direction: column;
+        }
+
+        .grid-item:hover .project-card {
+            height: auto; min-height: 100%; width: 115%;
+            transform: translateX(-50%) translateY(-10px);
+            background: #1e293b; box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+            border-color: var(--primary);
+        }
+
+        .img-box { height: 180px; width: 100%; overflow: hidden; position: relative; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        
+        .badge {
+            position: absolute; top: 10px; right: 10px; padding: 4px 10px;
+            border-radius: 4px; font-size: 0.7rem; font-weight: bold; color: white;
+            backdrop-filter: blur(4px); box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .content-box { padding: 20px; }
+        .content-box h3, .content-box h3 a {
+            font-size: 1.5rem; font-weight: 700; line-height: 1.3;
+            margin-bottom: 12px; color: white;
+        }
+
+        .project-desc {
+            font-size: 0.95rem; color: #cbd5e1; line-height: 1.6;
+            max-height: 60px; overflow: hidden; transition: 0.3s;
+        }
+        .project-desc ul { list-style-type: none; padding-left: 0; margin-top: 10px; }
+        .project-desc li { position: relative; padding-left: 15px; margin-bottom: 6px; }
+        .project-desc li::before {
+            content: "•"; color: var(--primary); font-weight: bold;
+            position: absolute; left: 0;
+        }
+        .project-desc strong { color: white; font-weight: 600; }
+
+        .grid-item:hover .project-desc { max-height: 500px; margin-bottom: 15px; }
+
+        .tech-row {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;
+            opacity: 0; max-height: 0; transition: 0.3s;
+        }
+        .grid-item:hover .tech-row { opacity: 1; max-height: 100px; }
+
+        .tech-pill {
+            font-size: 0.7rem; color: var(--primary);
+            background: rgba(0, 163, 255, 0.1); padding: 4px 10px; border-radius: 4px;
+            border: 1px solid rgba(0, 163, 255, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-wrapper nav { display: none; }
+            .hamburger { display: block !important; }
+        }
+
+        footer{
+            text-align: center;
+        }
+    </style>
+</head>
 
 <body>
 
-   <header id="header">
-    <div class="container nav-wrapper">
-        <a href="index.html" class="logo">
-            <img src="portfolio/logo.png" alt="IFuture Logo" class="nav-logo-icon">
-            <div>IFUTURE <span>CORPORATION</span></div>
-        </a>
-        
-        <nav>
-            <ul>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#testimonials">Testimonials</a></li>
-                <li><a href="index.html#team">Team</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-        
-        <i class="fas fa-bars hamburger"></i>
-    </div>
-</header>
+    <header id="header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="portfolio/logo.png" alt="IFuture Logo" class="nav-logo-icon">
+                <div>IFUTURE <span>CORPORATION</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#skills">Skills</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <i class="fas fa-bars hamburger"></i>
+        </div>
+    </header>
 
-<section class="page-header">
-    <div class="container">
-        <h4 class="text-gradient">OUR WORK</h4>
-        <h1>Project Portfolio</h1>
-        <p>Explore our engineering masterpieces. These case studies demonstrate our ability to deliver complex, scalable solutions across Government, Healthcare, and Enterprise sectors.</p>
-    </div>
-</section>
+    <section class="page-header">
+        <div class="container">
+            <h1>Project Portfolio</h1>
+            <h3>Explore our engineering masterpieces. These case studies demonstrate our ability to deliver complex, scalable solutions across Government, Healthcare, and Enterprise sectors.</h3>
+        </div>
+    </section>
 
-<section class="section-padding">
-    <div class="container">
-        <div class="grid-3">
+    <section class="section-padding">
+        <div class="container">
+            <div class="grid-3">
 
-    <div class="category-header">
-        <h3>Government & Enterprise Solutions</h3>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ea580c">UP Govt</span>
-                <img src="portfolio/chAR.png" alt="Character Certificate">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://test.ifuturecorporation.com" target="_blank" style="color:white;">Character & Hasyat Online Certification</a></h3>
-                <div class="project-desc">
-                    A comprehensive e-Governance solution designed for the <strong>Uttar Pradesh Government</strong> to streamline the issuance of Character and Hasyat certificates.<br><br>
-                    <strong>Key Features:</strong>
-                    <ul>
-                        <li><strong>Citizen Portal:</strong> Users can file requests online and track status in real-time.</li>
-                        <li><strong>Multi-Tier Approval:</strong> Automated routing to SSP and Revenue departments.</li>
-                        <li><strong>Secure Issuance:</strong> Digitally signed, downloadable certificates.</li>
-                    </ul>
+                <div class="category-header">
+                    <h3>Government & Enterprise Solutions</h3>
                 </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">SQL Server</span><span class="tech-pill">MVC</span><span class="tech-pill">Google Maps</span></div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-orange">UP Govt</span>
+                            <img src="portfolio/chAR.png" alt="Character Certificate" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://test.ifuturecorporation.com" target="_blank" rel="noopener noreferrer" style="color:white;">Character & Hasyat Online</a></h3>
+                            <div class="project-desc">
+                                A comprehensive e-Governance solution designed for the <strong>Uttar Pradesh Government</strong>.<br><br>
+                                <strong>Key Features:</strong>
+                                <ul>
+                                    <li><strong>Citizen Portal:</strong> Users can file requests online and track status.</li>
+                                    <li><strong>Multi-Tier Approval:</strong> Automated routing to SSP and Revenue.</li>
+                                    <li><strong>Secure Issuance:</strong> Digitally signed, downloadable certificates.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">SQL Server</span><span class="tech-pill">MVC</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-orange">UP Govt</span>
+                            <img src="portfolio/aig.png" alt="Stamp Duty Map" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://nic.ifuturecorporation.com" target="_blank" rel="noopener noreferrer" style="color:white;">Stamp Duty GIS Portal</a></h3>
+                            <div class="project-desc">
+                                A GIS-based solution for the <strong>Stamp and Registration Department</strong> using Google Maps.<br><br>
+                                <strong>Key Features:</strong>
+                                <ul>
+                                    <li><strong>Visual Mapping:</strong> Interactive markers to view land costs.</li>
+                                    <li><strong>Dynamic Calculation:</strong> Real-time stamp duty calculator.</li>
+                                    <li><strong>Digitization:</strong> Converted legacy records into geospatial data.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">Google Maps API</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Healthcare</span>
+                            <img src="portfolio/hims.jpeg" alt="Hospital ERP" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Hospital Management (HIMS)</h3>
+                            <div class="project-desc">
+                                Full-stack ERP solution to automate operational flows of multi-specialty hospitals.<br><br>
+                                <strong>Modules Included:</strong>
+                                <ul>
+                                    <li><strong>Patient Lifecycle:</strong> OPD registration to IPD admission.</li>
+                                    <li><strong>Clinical:</strong> EMR and pathology reporting.</li>
+                                    <li><strong>Administrative:</strong> Billing, insurance processing, and accounting.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">AJAX</span><span class="tech-pill">SQL Server</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-orange">Desktop App</span>
+                            <img src="portfolio/goel.PNG" alt="Inventory" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Inventory & Construction ERP</h3>
+                            <div class="project-desc">
+                                Robust desktop-based ERP solution for Construction and Marketing organizations.<br><br>
+                                <strong>Core Functionalities:</strong>
+                                <ul>
+                                    <li><strong>Inventory Tracking:</strong> Real-time stock monitoring.</li>
+                                    <li><strong>HR & Payroll:</strong> Automated attendance and salary processing.</li>
+                                    <li><strong>Hybrid Sync:</strong> Desktop app syncs data with cloud server.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">C# Desktop</span><span class="tech-pill">Web API</span><span class="tech-pill">SQL Server</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Construction</span>
+                            <img src="portfolio/jg.PNG" alt="JG Construction" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>JG Construction Portal (UK)</h3>
+                            <div class="project-desc">
+                                A custom CRM built for a <strong>UK-based construction firm</strong> to streamline sales.<br><br>
+                                <strong>Key Capabilities:</strong>
+                                <ul>
+                                    <li><strong>Lead Management:</strong> Captures inquiries and assigns to agents.</li>
+                                    <li><strong>Project Progress:</strong> Visual dashboards to track milestones.</li>
+                                    <li><strong>Remote Access:</strong> Cloud-based reporting for stakeholders.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">JQUERY</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Automation</span>
+                            <img src="portfolio/mgranny.png" alt="Master Granny" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Master Granny Flats CRM</h3>
+                            <div class="project-desc">
+                                Specialized Quote and Invoice system designed to automate sales for housing.<br><br>
+                                <strong>Features:</strong>
+                                <ul>
+                                    <li><strong>Dynamic Quoting:</strong> Generates quotes based on dimensions.</li>
+                                    <li><strong>Automated Alerts:</strong> SMS/Email triggers for approvals.</li>
+                                    <li><strong>Financial Tracking:</strong> Tracks paid vs. pending invoices.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Job Portal</span>
+                            <img src="portfolio/fzobs.jpeG" alt="Fresh Jobs" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Fresh Jobs Street</h3>
+                            <div class="project-desc">
+                                Dynamic job portal connecting candidates with employers featuring a powerful admin panel.<br><br>
+                                <strong>Highlights:</strong>
+                                <ul>
+                                    <li><strong>Real-time Alerts:</strong> SMS/Email notifications.</li>
+                                    <li><strong>Employer Dashboard:</strong> Post jobs and filter applicants.</li>
+                                    <li><strong>Scalable:</strong> Built to handle high traffic drives.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-header border-primary">
+                    <h3 class="border-primary">Web Development & E-Commerce</h3>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">E-Commerce</span>
+                            <img src="portfolio/ivei.png" alt="IVEI" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://ivei.in" target="_blank" rel="noopener noreferrer" style="color:white;">I Value Every Idea (IVEI)</a></h3>
+                            <div class="project-desc">
+                                Bespoke E-commerce platform built on NopCommerce for a premium artifacts brand.<br><br>
+                                <strong>Highlights:</strong>
+                                <ul>
+                                    <li><strong>Custom UX/UI:</strong> Minimalist design highlighting products.</li>
+                                    <li><strong>Performance:</strong> Heavy caching for sub-second load times.</li>
+                                    <li><strong>Scalability:</strong> Handles thousands of concurrent users.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Marketplace</span>
+                            <img src="portfolio/strain.png" alt="Strain Portal" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://strain.eazyapps.com" target="_blank" rel="noopener noreferrer" style="color:white;">Strain & Herbs Marketplace</a></h3>
+                            <div class="project-desc">
+                                Massive aggregator portal housing data for over <strong>1 million plant strains</strong>.<br><br>
+                                <strong>Technical Scope:</strong>
+                                <ul>
+                                    <li><strong>Data Aggregation:</strong> Automated scraping from global sources.</li>
+                                    <li><strong>Geo-Fencing:</strong> Restricts buying based on regional laws.</li>
+                                    <li><strong>API First:</strong> RESTful architecture for mobile integration.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">Web API</span><span class="tech-pill">REST API</span><span class="tech-pill">Scraping</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Real Estate</span>
+                            <img src="portfolio/migsun.png" alt="Migsun" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://migsun.in/index.php" target="_blank" rel="noopener noreferrer" style="color:white;">Migsun Real Estate</a></h3>
+                            <div class="project-desc">
+                                High-conversion lead generation portal for a leading real estate developer.<br><br>
+                                <strong>Key Features:</strong>
+                                <ul>
+                                    <li><strong>Property Showcase:</strong> Virtual tours and specs.</li>
+                                    <li><strong>Lead Capture:</strong> Integrated CRM forms routing to sales.</li>
+                                    <li><strong>SEO Optimized:</strong> Ranked top in NCR region.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">HR Tech</span>
+                            <img src="portfolio/staffer.png" alt="Staffer" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Staffer Recruitment (USA)</h3>
+                            <div class="project-desc">
+                                A 3-way recruitment ecosystem connecting Job Seekers, Employers, and Consultants.<br><br>
+                                <strong>Workflow:</strong>
+                                <ul>
+                                    <li><strong>Resume Parsing:</strong> Auto-extracts skills from CVs.</li>
+                                    <li><strong>Employer Dashboard:</strong> Manage jobs and interviews.</li>
+                                    <li><strong>Consultant Access:</strong> Track pools and commissions.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">E-Commerce</span>
+                            <img src="portfolio/ecommerce.PNG" alt="Handicraft" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Handicraft Marketplace</h3>
+                            <div class="project-desc">
+                                Global marketplace for artisans to sell unique handicraft items.<br><br>
+                                <strong>Integrations:</strong>
+                                <ul>
+                                    <li><strong>Payment Gateways:</strong> PayPal (Global) and PayUmoney.</li>
+                                    <li><strong>Inventory Logic:</strong> Prevents overselling unique items.</li>
+                                    <li><strong>Vendor Portal:</strong> Artisans upload their own products.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">Payment Gateway</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-blue">Marketing</span>
+                            <img src="portfolio/emailapplication.PNG" alt="Bulk Email" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Bulk Email Engine</h3>
+                            <div class="project-desc">
+                                Proprietary marketing automation tool for lead acquisition and retention.<br><br>
+                                <strong>Features:</strong>
+                                <ul>
+                                    <li><strong>Campaign Management:</strong> Schedule newsletters to large lists.</li>
+                                    <li><strong>Analytics:</strong> Reporting on open rates and CTR.</li>
+                                    <li><strong>Compliance:</strong> Built-in anti-spam safeguards.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">Analytics</span></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="category-header border-green">
+                    <h3 class="border-green">Scrapers & Automation</h3>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-green">Automation</span>
+                            <img src="portfolio/linkedin scrapper.jpg" alt="LinkedIn Scraper" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>LinkedIn Data Scraper</h3>
+                            <div class="project-desc">
+                                Designed for a <strong>UK-based organization</strong> to automate B2B marketing data.<br><br>
+                                <ul>
+                                    <li><strong>Functionality:</strong> Crawls profiles for contact info and skills.</li>
+                                    <li><strong>Export:</strong> Formats data into CSV/Excel for CRM import.</li>
+                                    <li><strong>Use Case:</strong> High-volume lead generation.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">C#</span><span class="tech-pill">SQL Server</span><span class="tech-pill">Excel Auto</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-green">E-Com Bot</span>
+                            <img src="portfolio/amazon.png" alt="Amazon Scraper" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Amazon Product Scraper</h3>
+                            <div class="project-desc">
+                                Desktop-based bot to monitor competitor pricing and trends on Amazon.<br><br>
+                                <ul>
+                                    <li><strong>Data Extraction:</strong> Scrapes titles, prices, ratings.</li>
+                                    <li><strong>Analysis:</strong> Exports for competitive analysis.</li>
+                                    <li><strong>Architecture:</strong> Web Services and Windows App.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">C#</span><span class="tech-pill">Windows App</span><span class="tech-pill">Web Services</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-green">Job Bot</span>
+                            <img src="portfolio/glassdoor.png" alt="Glassdoor Scraper" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>GlassDoor Corporate Scraper</h3>
+                            <div class="project-desc">
+                                Analytical tool to gather intelligence on company reviews and salaries.<br><br>
+                                <ul>
+                                    <li><strong>Scope:</strong> Scrapes data for comparative databases.</li>
+                                    <li><strong>Output:</strong> Structured Excel reports for HR analysis.</li>
+                                    <li><strong>Tech Stack:</strong> High-performance ASP.NET web bot.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">SQL SERVER</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-green">Utility</span>
+                            <img src="portfolio/pdfscrapper.jpg" alt="PDF Scraper" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Intelligent PDF Scraper</h3>
+                            <div class="project-desc">
+                                Document automation utility for processing unstructured PDF data.<br><br>
+                                <ul>
+                                    <li><strong>Text Extraction:</strong> Pattern recognition to pull text blocks.</li>
+                                    <li><strong>Search & Replace:</strong> Automated "Find & Replace".</li>
+                                    <li><strong>Automation:</strong> Saves hours of manual data entry.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">MVC</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-green">Lead Gen</span>
+                            <img src="portfolio/Emailscrapper.png" alt="Email Scraper" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3>Web Email Scraper</h3>
+                            <div class="project-desc">
+                                Lead generation engine that crawls websites for contact info.<br><br>
+                                <ul>
+                                    <li><strong>Crawling:</strong> Navigates site hierarchies to find contacts.</li>
+                                    <li><strong>Extraction:</strong> Regex identification of email patterns.</li>
+                                    <li><strong>Integration:</strong> Seamless formatting for marketing.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">C#</span><span class="tech-pill">SQL Server</span><span class="tech-pill">Regex</span></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="category-header border-pink">
+                    <h3 class="border-pink">Web Design & Branding</h3>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-pink">Web Design</span>
+                            <img src="portfolio/dwud.PNG" alt="Designwud" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://designwud.com" target="_blank" rel="noopener noreferrer" style="color:white;">Designwud - Architecture</a></h3>
+                            <div class="project-desc">
+                                Portfolio website for a leading architectural firm in Delhi/NCR.<br><br>
+                                <strong>Focus:</strong>
+                                <ul>
+                                    <li><strong>Visual Appeal:</strong> High-res galleries for Hotels.</li>
+                                    <li><strong>Services Highlight:</strong> Dedicated sections for Interiors.</li>
+                                    <li><strong>Responsive:</strong> Perfect rendering on all devices.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span><span class="tech-pill">HTML</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-pink">Advisory</span>
+                            <img src="portfolio/inprove.png" alt="Inproved" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://inproved.com" target="_blank" rel="noopener noreferrer" style="color:white;">Inproved - Mining</a></h3>
+                            <div class="project-desc">
+                                Corporate website for a premier <strong>Singapore Mining Advisor</strong>.<br><br>
+                                <ul>
+                                    <li><strong>Global Reach:</strong> SEO optimized for Asian mining sectors.</li>
+                                    <li><strong>Professional UX:</strong> Clean aesthetic for complex services.</li>
+                                    <li><strong>Tech Stack:</strong> HTML5/Web APIs for speed.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">HTML5</span><span class="tech-pill">WEB API</span><span class="tech-pill">CSS</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-pink">Healthcare</span>
+                            <img src="portfolio/doctorinsta.PNG" alt="Doctor Insta" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://doctorinsta.com" target="_blank" rel="noopener noreferrer" style="color:white;">Doctor Insta</a></h3>
+                            <div class="project-desc">
+                                Telemedicine platform connecting patients with doctors instantly.<br><br>
+                                <ul>
+                                    <li><strong>Instant Access:</strong> One-click video calls/chats.</li>
+                                    <li><strong>Convenience:</strong> Medical assistance from home.</li>
+                                    <li><strong>Platform:</strong> Robust WordPress CMS for scalability.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span><span class="tech-pill">HTML</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item">
+                    <div class="project-card">
+                        <div class="img-box">
+                            <span class="badge bg-pink">Astrology</span>
+                            <img src="portfolio/astrogurubhai.PNG" alt="AstroGuruBhai" loading="lazy">
+                        </div>
+                        <div class="content-box">
+                            <h3><a href="http://astrogurubhai.com" target="_blank" rel="noopener noreferrer" style="color:white;">AstroGuruBhai</a></h3>
+                            <div class="project-desc">
+                                Educational and service-oriented astrology portal.<br><br>
+                                <ul>
+                                    <li><strong>Scientific Approach:</strong> Explains cosmic connections.</li>
+                                    <li><strong>Calculations:</strong> Accurate reports based on placements.</li>
+                                    <li><strong>Engagement:</strong> Booking system for services.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span><span class="tech-pill">HTML</span></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ea580c">UP Govt</span>
-                <img src="portfolio/aig.png" alt="Stamp Duty Map">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://nic.ifuturecorporation.com" target="_blank" style="color:white;">Stamp and Registration GIS Portal</a></h3>
-                <div class="project-desc">
-                    A GIS-based solution for the <strong>Stamp and Registration Department</strong> to democratize land valuation data using Google Maps integration.<br><br>
-                    <strong>Key Features:</strong>
-                    <ul>
-                        <li><strong>Visual Mapping:</strong> Interactive markers to view land costs (Residential/Commercial).</li>
-                        <li><strong>Dynamic Calculation:</strong> Real-time stamp duty calculator based on circle rates.</li>
-                        <li><strong>Digitization:</strong> Converted legacy revenue records into digital geospatial data.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">Google Maps API</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Healthcare</span>
-                <img src="portfolio/hims.jpeg" alt="Hospital ERP">
-            </div>
-            <div class="content-box">
-                <h3>Hospital Management System (HIMS)</h3>
-                <div class="project-desc">
-                    A full-stack ERP solution designed to automate the complex operational flows of multi-specialty hospitals.<br><br>
-                    <strong>Modules Included:</strong>
-                    <ul>
-                        <li><strong>Patient Lifecycle:</strong> OPD registration to IPD admission and discharge.</li>
-                        <li><strong>Clinical Management:</strong> Electronic Medical Records (EMR) and pathology reporting.</li>
-                        <li><strong>Administrative:</strong> Automated billing, insurance processing, and accounting.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">AJAX</span><span class="tech-pill">SQL Server</span><span class="tech-pill">MVC</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ea580c">Desktop App</span>
-                <img src="portfolio/goel.PNG" alt="Inventory">
-            </div>
-            <div class="content-box">
-                <h3>Enterprise Inventory & Construction ERP</h3>
-                <div class="project-desc">
-                    A robust desktop-based ERP solution tailored for Construction and Marketing organizations to manage supply chains.<br><br>
-                    <strong>Core Functionalities:</strong>
-                    <ul>
-                        <li><strong>Inventory Tracking:</strong> Real-time stock monitoring across multiple sites.</li>
-                        <li><strong>HR & Payroll:</strong> Automated attendance tracking and salary processing.</li>
-                        <li><strong>Hybrid Sync:</strong> Desktop app syncs data with cloud server for remote reporting.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">C# Desktop</span><span class="tech-pill">Web API</span><span class="tech-pill">SQL Server</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Construction</span>
-                <img src="portfolio/jg.PNG" alt="JG Construction">
-            </div>
-            <div class="content-box">
-                <h3>JG Construction Lead Portal (UK)</h3>
-                <div class="project-desc">
-                    A custom CRM built for a <strong>UK-based construction firm</strong> to streamline their sales pipeline.<br><br>
-                    <strong>Key Capabilities:</strong>
-                    <ul>
-                        <li><strong>Lead Management:</strong> Captures inquiries and assigns to sales agents.</li>
-                        <li><strong>Project Progress:</strong> Visual dashboards to track construction milestones.</li>
-                        <li><strong>Remote Access:</strong> Cloud-based reporting for stakeholders worldwide.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">JQUERY</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Automation</span>
-                <img src="portfolio/mgranny.png" alt="Master Granny">
-            </div>
-            <div class="content-box">
-                <h3>Master Granny Flats CRM</h3>
-                <div class="project-desc">
-                    A specialized Quote and Invoice management system designed to automate sales for housing construction.<br><br>
-                    <strong>Features:</strong>
-                    <ul>
-                        <li><strong>Dynamic Quoting:</strong> Generates quotes based on selected materials/dimensions.</li>
-                        <li><strong>Automated Alerts:</strong> SMS/Email triggers for approvals and payments.</li>
-                        <li><strong>Financial Tracking:</strong> Tracks paid vs. pending invoices.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Job Portal</span>
-                <img src="portfolio/fzobs.jpeG" alt="Fresh Jobs">
-            </div>
-            <div class="content-box">
-                <h3>Fresh Jobs Street</h3>
-                <div class="project-desc">
-                    A dynamic job portal connecting candidates with employers, featuring a powerful admin panel.<br><br>
-                    <strong>Highlights:</strong>
-                    <ul>
-                        <li><strong>Real-time Alerts:</strong> SMS/Email notifications for application updates.</li>
-                        <li><strong>Employer Dashboard:</strong> Post jobs and filter applicants efficiently.</li>
-                        <li><strong>Scalable:</strong> Built to handle high traffic during recruitment drives.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="category-header" style="border-color: var(--primary);">
-        <h3 style="border-color: var(--primary);">Web Development & E-Commerce</h3>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">E-Commerce</span>
-                <img src="portfolio/ivei.png" alt="IVEI">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://ivei.in" target="_blank" style="color:white;">I Value Every Idea (IVEI)</a></h3>
-                <div class="project-desc">
-                    A bespoke E-commerce platform built on NopCommerce for a premium handmade artifacts brand.<br><br>
-                    <strong>Highlights:</strong>
-                    <ul>
-                        <li><strong>Custom UX/UI:</strong> Minimalist design highlighting intricate products.</li>
-                        <li><strong>Performance:</strong> Heavy caching for sub-second load times.</li>
-                        <li><strong>Scalability:</strong> Handles thousands of concurrent users during sales.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Marketplace</span>
-                <img src="portfolio/strain.png" alt="Strain Portal">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://strain.eazyapps.com" target="_blank" style="color:white;">Strain & Herbs Global Marketplace</a></h3>
-                <div class="project-desc">
-                    A massive aggregator portal housing data for over <strong>1 million plant strains</strong>.<br><br>
-                    <strong>Technical Scope:</strong>
-                    <ul>
-                        <li><strong>Data Aggregation:</strong> Automated scraping from global sources.</li>
-                        <li><strong>Geo-Fencing:</strong> Restricts buying/selling based on regional laws.</li>
-                        <li><strong>API First:</strong> RESTful architecture for mobile app integration.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">Web API</span><span class="tech-pill">REST API</span><span class="tech-pill">Scraping</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Real Estate</span>
-                <img src="portfolio/migsun.png" alt="Migsun">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://migsun.in/index.php" target="_blank" style="color:white;">Migsun Real Estate Portal</a></h3>
-                <div class="project-desc">
-                    A high-conversion lead generation portal for a leading real estate developer.<br><br>
-                    <strong>Key Features:</strong>
-                    <ul>
-                        <li><strong>Property Showcase:</strong> Virtual tours and specification sheets.</li>
-                        <li><strong>Lead Capture:</strong> Integrated CRM forms routing to sales teams.</li>
-                        <li><strong>SEO Optimized:</strong> Ranked top in NCR region.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">HR Tech</span>
-                <img src="portfolio/staffer.png" alt="Staffer">
-            </div>
-            <div class="content-box">
-                <h3>Staffer Recruitment Portal (USA)</h3>
-                <div class="project-desc">
-                    A 3-way recruitment ecosystem connecting Job Seekers, Employers, and Consultants.<br><br>
-                    <strong>Workflow:</strong>
-                    <ul>
-                        <li><strong>Resume Parsing:</strong> Auto-extracts skills from uploaded CVs.</li>
-                        <li><strong>Employer Dashboard:</strong> Manage jobs, candidates, and interviews.</li>
-                        <li><strong>Consultant Access:</strong> Track candidate pools and commissions.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">MVC</span><span class="tech-pill">SQL SERVER</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">E-Commerce</span>
-                <img src="portfolio/ecommerce.PNG" alt="Handicraft">
-            </div>
-            <div class="content-box">
-                <h3>Handicraft E-Commerce Portal</h3>
-                <div class="project-desc">
-                    A global marketplace for artisans to sell unique handicraft items.<br><br>
-                    <strong>Integrations:</strong>
-                    <ul>
-                        <li><strong>Payment Gateways:</strong> PayPal (Global) and PayUmoney (India).</li>
-                        <li><strong>Inventory Logic:</strong> Prevents overselling of unique items.</li>
-                        <li><strong>Vendor Portal:</strong> Artisans can upload and track their own products.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">Payment Gateway</span><span class="tech-pill">SQL SERVER</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#3b82f6">Marketing</span>
-                <img src="portfolio/emailapplication.PNG" alt="Bulk Email">
-            </div>
-            <div class="content-box">
-                <h3>Bulk Email and Newsletter Engine</h3>
-                <div class="project-desc">
-                    A proprietary marketing automation tool for lead acquisition and retention.<br><br>
-                    <strong>Features:</strong>
-                    <ul>
-                        <li><strong>Campaign Management:</strong> Schedule newsletters to large lists.</li>
-                        <li><strong>Analytics:</strong> Reporting on open rates and CTR.</li>
-                        <li><strong>Compliance:</strong> Built-in anti-spam safeguards.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">Analytics</span></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="category-header" style="border-color: #10b981;">
-        <h3 style="border-color: #10b981;">Scrapers & Automation</h3>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#10b981">Automation</span>
-                <img src="portfolio/linkedin scrapper.jpg" alt="LinkedIn Scraper">
-            </div>
-            <div class="content-box">
-                <h3>LinkedIn Data Scraper</h3>
-                <div class="project-desc">
-                    Designed for a <strong>UK-based organization</strong> to automate B2B marketing data extraction.<br><br>
-                    <ul>
-                        <li><strong>Functionality:</strong> Crawls profiles for contact info and skills.</li>
-                        <li><strong>Export:</strong> Formats data into CSV/Excel for CRM import.</li>
-                        <li><strong>Use Case:</strong> High-volume lead generation.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">C#</span><span class="tech-pill">SQL Server</span><span class="tech-pill">Excel Auto</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#10b981">E-Com Bot</span>
-                <img src="portfolio/amazon.png" alt="Amazon Scraper">
-            </div>
-            <div class="content-box">
-                <h3>Amazon Product Scraper</h3>
-                <div class="project-desc">
-                    A desktop-based bot to monitor competitor pricing and trends on Amazon.<br><br>
-                    <ul>
-                        <li><strong>Data Extraction:</strong> Scrapes titles, prices, ratings, and reviews.</li>
-                        <li><strong>Analysis:</strong> Exports for competitive analysis.</li>
-                        <li><strong>Architecture:</strong> Web Services and Windows Application.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">C#</span><span class="tech-pill">Windows App</span><span class="tech-pill">Web Services</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#10b981">Job Bot</span>
-                <img src="portfolio/glassdoor.png" alt="Glassdoor Scraper">
-            </div>
-            <div class="content-box">
-                <h3>GlassDoor Corporate Scraper</h3>
-                <div class="project-desc">
-                    Analytical tool to gather intelligence on company reviews and salaries.<br><br>
-                    <ul>
-                        <li><strong>Scope:</strong> Scrapes data for comparative databases.</li>
-                        <li><strong>Output:</strong> Structured Excel reports for HR analysis.</li>
-                        <li><strong>Tech Stack:</strong> High-performance ASP.NET web bot.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">SQL SERVER</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#10b981">Utility</span>
-                <img src="portfolio/pdfscrapper.jpg" alt="PDF Scraper">
-            </div>
-            <div class="content-box">
-                <h3>Intelligent PDF Scraper</h3>
-                <div class="project-desc">
-                    Document automation utility for processing unstructured PDF data.<br><br>
-                    <ul>
-                        <li><strong>Text Extraction:</strong> Pattern recognition to pull specific text blocks.</li>
-                        <li><strong>Search & Replace:</strong> Automated "Find & Replace" for static PDFs.</li>
-                        <li><strong>Automation:</strong> Saves hours of manual data entry.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">ASP.NET</span><span class="tech-pill">C#</span><span class="tech-pill">MVC</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#10b981">Lead Gen</span>
-                <img src="portfolio/Emailscrapper.png" alt="Email Scraper">
-            </div>
-            <div class="content-box">
-                <h3>Web Email Scraper Service</h3>
-                <div class="project-desc">
-                    Lead generation engine that crawls websites for contact info.<br><br>
-                    <ul>
-                        <li><strong>Crawling:</strong> Navigates site hierarchies to find "Contact" pages.</li>
-                        <li><strong>Extraction:</strong> Regex identification of valid email patterns.</li>
-                        <li><strong>Integration:</strong> Seamless formatting for marketing campaigns.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">C#</span><span class="tech-pill">SQL Server</span><span class="tech-pill">Office Interop</span></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="category-header" style="border-color: #ec4899;">
-        <h3 style="border-color: #ec4899;">Web Design & Branding</h3>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ec4899">Web Design</span>
-                <img src="portfolio/dwud.PNG" alt="Designwud">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://designwud.com" target="_blank" style="color:white;">Designwud - Architecture</a></h3>
-                <div class="project-desc">
-                    Portfolio website for a leading architectural firm in Delhi/NCR.<br><br>
-                    <strong>Focus:</strong>
-                    <ul>
-                        <li><strong>Visual Appeal:</strong> High-res galleries for Malls, Hotels, and Hospitals.</li>
-                        <li><strong>Services Highlight:</strong> Dedicated sections for Landscape & Interiors.</li>
-                        <li><strong>Responsive:</strong> Perfect rendering on all devices.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span><span class="tech-pill">HTML</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ec4899">Advisory</span>
-                <img src="portfolio/inprove.png" alt="Inproved">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://inproved.com" target="_blank" style="color:white;">Inproved - Mining Advisory</a></h3>
-                <div class="project-desc">
-                    Corporate website for a premier <strong>Singapore Mining Advisor</strong>.<br><br>
-                    <ul>
-                        <li><strong>Global Reach:</strong> SEO optimized for Asian mining sectors.</li>
-                        <li><strong>Professional UX:</strong> Clean aesthetic for complex advisory services.</li>
-                        <li><strong>Tech Stack:</strong> HTML5/Web APIs for speed.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">HTML5</span><span class="tech-pill">WEB API</span><span class="tech-pill">CSS</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ec4899">Healthcare</span>
-                <img src="portfolio/doctorinsta.PNG" alt="Doctor Insta">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://doctorinsta.com" target="_blank" style="color:white;">Doctor Insta</a></h3>
-                <div class="project-desc">
-                    Telemedicine platform connecting patients with doctors instantly.<br><br>
-                    <ul>
-                        <li><strong>Instant Access:</strong> One-click video calls/chats with doctors.</li>
-                        <li><strong>Convenience:</strong> Medical assistance from home.</li>
-                        <li><strong>Platform:</strong> Robust WordPress CMS for scalability.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span><span class="tech-pill">HTML</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="project-card">
-            <div class="img-box">
-                <span class="badge" style="background:#ec4899">Astrology</span>
-                <img src="portfolio/astrogurubhai.PNG" alt="AstroGuruBhai">
-            </div>
-            <div class="content-box">
-                <h3><a href="http://astrogurubhai.com" target="_blank" style="color:white;">AstroGuruBhai</a></h3>
-                <div class="project-desc">
-                    Educational and service-oriented astrology portal.<br><br>
-                    <ul>
-                        <li><strong>Scientific Approach:</strong> Explains cosmic connections over simple horoscopes.</li>
-                        <li><strong>Calculations:</strong> Accurate reports based on planetary placements.</li>
-                        <li><strong>Engagement:</strong> Booking system for services and articles.</li>
-                    </ul>
-                </div>
-                <div class="tech-row"><span class="tech-pill">WordPress</span><span class="tech-pill">MySQL</span><span class="tech-pill">HTML</span></div>
-            </div>
-        </div>
-    </div>
-
-</div>   
     <section class="section-padding" style="background: var(--bg-card); text-align: center;">
         <div class="container">
             <h2 style="margin-bottom: 20px;">Still Can't Find The Right Solution?</h2>
@@ -829,35 +744,49 @@ nav a:hover::after, nav a.active::after { width: 100%; }
     </section>
 
     <footer>
-        <div class="container">
-            <a href="#" class="logo">IFUTURE <span>CORPORATION</span></a>
-            <p class="copyright">© 2011-2025 IFuture Corporation. All Rights Reserved.</p>
+        <div class="container"> 
+            <p class="copyright">© 2011-2025 IFuture Corporation. All Rights Reserved.| <a href="privacypolicy.html" target="_blank" style="margin-left: 2px;color: #00A3FF;"> Privacy Policy</a></p>
         </div>
     </footer>
 
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Sticky Header
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
             });
-        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+            // 2. Mobile Menu Toggle (Fixed logic)
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            if (hamburger && nav) {
+                hamburger.addEventListener('click', () => {
+                    const isVisible = nav.style.display === 'flex';
+                    nav.style.display = isVisible ? 'none' : 'flex';
+                    if (!isVisible) {
+                        nav.style.flexDirection = 'column';
+                        nav.style.position = 'absolute';
+                        nav.style.top = '80px';
+                        nav.style.right = '0';
+                        nav.style.background = 'rgba(12, 27, 59, 0.98)';
+                        nav.style.width = '100%';
+                        nav.style.padding = '20px';
+                        nav.style.textAlign = 'center';
+                        nav.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+                    }
+                });
+            }
 
-     <script>
-         (function (i, s, o, g, r, a, m) {
-             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                 (i[r].q = i[r].q || []).push(arguments)
-             }, i[r].l = 1 * new Date(); a = s.createElement(o),
-       m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-         ga('create', 'UA-65031987-1', 'auto');
-         ga('send', 'pageview');
-
+            // 3. Scroll Reveal Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
     </script>
 </body>
 </html>
