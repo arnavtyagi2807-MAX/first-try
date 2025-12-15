@@ -85,10 +85,16 @@
            HEADER
            ========================================= */
         header#header {
-            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 0; transition: 0.4s;
-            background: rgba(12, 27, 59, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 99999; /* Updated to be higher than everything else */
+    padding: 20px 0; 
+    transition: 0.4s;
+    background: rgba(12, 27, 59, 0.95); 
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
         header#header.scrolled { padding: 10px 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
 
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
@@ -192,14 +198,53 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-wrapper nav { display: none; }
-            .hamburger { display: block !important; }
+         @media (max-width: 768px) {
+            /* 1. Fix Logo Text Wrapping */
+    .logo { 
+        font-size: 1.4rem; 
+    }
+    .logo span { 
+        display: none !important; /* Hides 'CORPORATION' on mobile to save space */
+    }
+
+    /* 2. Mobile Nav Base Styles */
+    .nav-wrapper nav {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        position: fixed; /* Fixed so it stays on screen while scrolling */
+        top: 70px;       /* Pushes it below the header */
+        left: 0;
+        width: 100%;
+        background: rgba(12, 27, 59, 0.98);
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .nav-wrapper nav.active-menu {
+        display: flex !important; /* Force it to show */
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    .hamburger { 
+        display: block !important; 
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10001; /* Ensures icon is always clickable */
+    }
         }
+        @media (min-width: 1600px) and (pointer: fine) { body { zoom: 1.05; } }
+        @media (min-width: 2000px) { body { zoom: 1.10; } }
 
         footer{
             text-align: center;
         }
+        @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
     </style>
 </head>
 
