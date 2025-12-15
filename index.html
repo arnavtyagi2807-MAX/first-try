@@ -37,20 +37,20 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-
-  z-index: 0; /* 🔥 FIX: was negative or wrong */
+  z-index: 0;
 
   background-image:
     linear-gradient(
-      rgba(2, 6, 23, 0.88),
-      rgba(2, 6, 23, 0.88)
+      rgba(2, 6, 23, 0.65),
+      rgba(2, 6, 23, 0.65)
     ),
     url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070");
 
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
+
 
 
 
@@ -253,6 +253,19 @@ body::before {
   position: relative;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+
 
 .hero::before {
   background: transparent;
@@ -389,7 +402,7 @@ body::before {
         .testimonial-slider {
             display: flex;
             gap: 20px;                 /* reduced gap */
-            animation: marquee 22s linear infinite; /* faster */
+            animation: marquee 10s linear infinite; /* faster */
         }
 
         .testimonial-slider:hover {
@@ -493,17 +506,7 @@ footer {
         .footer-logo span { color: var(--primary); }
         .copyright { color: var(--text-muted); font-size: 0.9rem; margin-top: 20px; }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .contact-container { grid-template-columns: 1fr; }
-            .nav-wrapper nav { display: none; }
-            .hamburger { display: block; }
-            .testimonial-card { width: 90vw; } /* Adjusted size for mobile screens */
-            /* Disable 3D effect on mobile for performance/usability */
-            .card:hover { transform: translateY(-10px) !important; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); }
-        }
-
+        
         /* ===== INTERACTION ENHANCEMENTS ===== */
 
         /* Smooth everything */
@@ -664,50 +667,44 @@ body {
     box-shadow 0.25s ease-out;
 }
 
-@media (hover: none) {
-  .card {
-    transform: none !important;
-  }
-}
-
-body {
-  position: relative;
-  z-index: 1;
-}
-
-/* --- MOBILE HEADER CLEANUP --- */
+/* --- MOBILE HEADER FIX (Force Override) --- */
 @media (max-width: 768px) {
     
-    /* 1. CONTAINER: Give it breathing room */
+    /* 1. CONTAINER: Add breathing room */
     .nav-wrapper {
-        padding: 0 15px; /* Adds space from the edges */
+        padding: 0 15px !important;
     }
 
-    /* 2. IMAGE: Force crop to show ICON ONLY */
+    /* 2. LOGO IMAGE: Force it to be a small square icon */
     .nav-logo-icon {
-        height: 38px !important;    /* Perfect mobile height */
-        width: 38px !important;     /* Force square */
+        width: 35px !important;       /* Fixed width */
+        height: 35px !important;      /* Fixed height */
+        min-width: 35px !important;   /* Prevents squishing */
+        
+        /* CROP: Shows only the left part (The Icon) */
         object-fit: cover !important;
-        object-position: 0% 50% !important; /* Locks onto the left side (Icon) */
+        object-position: 0% 50% !important; 
+        
         margin-right: 8px !important;
+        border-radius: 4px !important;
     }
 
-    /* 3. TEXT: Make it sleek */
+    /* 3. LOGO TEXT: Shrink and Hide 'CORP.' */
     .logo {
-        font-size: 1.4rem !important;
-        letter-spacing: -0.5px;
-    }
-
-    /* 4. HIDE "CORPORATION": The magic step for clean design */
-    .logo span {
-        display: none !important; /* Hides the orange 'CORP.' text on mobile */
+        font-size: 1.2rem !important; /* Smaller text */
+        letter-spacing: -0.5px !important;
     }
     
-    /* 5. Ensure Hamburger is visible and aligned */
-    .hamburger {
-        font-size: 1.6rem;
-        padding: 5px;
+    .logo span {
+        display: none !important; /* Hides 'CORP.' on mobile */
     }
+
+    /* 4. HAMBURGER: Align it properly */
+    .hamburger {
+        font-size: 1.5rem !important;
+        margin-left: auto !important; /* Pushes it to the far right */
+    }
+
 }
 .section-padding {
   padding: 100px 0;
@@ -727,23 +724,13 @@ body {
   padding-top: 20px;
 }
 
-/* Add this to the very bottom of your CSS */
-@media (min-width: 1920px) {
-    html {
-        font-size: 18px; /* Increases base size from default 16px */
-    }
-    .container {
-        max-width: 1600px; /* Allows slightly wider layout on huge screens */
-    }
-}
 
 /* ADD THIS AT THE VERY BOTTOM OF YOUR CSS */
 
-@media (min-width: 1600px) {
-    body {
-        zoom: 1.1; /* This equals 110% zoom */
-    }
+@media (min-width: 1600px) and (pointer: fine) {
+  body { zoom: 1.1; }
 }
+
 
 @media (min-width: 2000px) {
     body {
@@ -751,31 +738,38 @@ body {
     }
 }
 
-/* --- MOBILE LOGO FIX --- */
+/* ===== MOBILE STATS FIX ===== */
 @media (max-width: 768px) {
-    /* 1. Shrink the text size */
-    .logo {
-        font-size: 1.3rem !important; /* Smaller text for mobile */
-        gap: 8px; /* Reduce space between icon and text */
-    }
+  .stats .container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px;
+  }
 
-    /* 2. Shrink the icon size */
-    .nav-logo-icon {
-        height: 32px; /* Smaller icon height */
-        margin-right: 5px;
-    }
+  .stat-number {
+    font-size: 2.2rem; /* smaller numbers */
+  }
 
-    /* 3. Optional: Hide 'CORPORATION' on very small screens if it still breaks */
-    /* Uncomment the lines below if you want shorter text on mobile */
-    /* .logo div span {
-        display: none;
-    }
-    .logo div::after {
-        content: " CORP."; 
-        color: var(--accent);
-    } 
-    */
+  .stat-label {
+    font-size: 0.7rem;
+  }
 }
+
+@media (max-width: 420px) {
+  .stats .container {
+    grid-template-columns: 1fr !important; /* 1 per row on very small screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content,
+  .card,
+  .testimonial-card,
+  .team-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 
     </style>
 </head>
