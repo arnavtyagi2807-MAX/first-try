@@ -166,9 +166,26 @@
         .stat-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
 
         /* ===== TESTIMONIALS (MARQUEE) ===== */
-        .testimonial-slider-container { overflow: hidden; width: 100%; padding: 40px 0; }
-        .testimonial-slider { display: flex; gap: 20px; animation: marquee 20s linear infinite; }
-        .testimonial-slider:hover { animation-play-state: paused; }
+        .testimonial-slider-container { 
+    overflow: hidden; 
+    width: 100%; 
+    padding: 40px 0;
+    /* Optional: Fades on the edges for smoother look */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.testimonial-slider { 
+    display: flex; 
+    gap: 20px; 
+    /* Ensures the div is as wide as the cards, preventing wrapping */
+    width: max-content; 
+    animation: marquee 30s linear infinite; 
+}
+
+.testimonial-slider:hover { 
+    animation-play-state: paused; 
+}
         
         .testimonial-card {
             background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px;
@@ -177,7 +194,7 @@
         }
         .quote-icon { font-size: 3rem; color: rgba(255, 255, 255, 0.1); position: absolute; top: 20px; right: 30px; }
         
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-60%); } }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
         /* ===== TEAM ===== */
@@ -398,7 +415,7 @@
         </div>
     </section>
     
-    <section id="testimonials" class="section-padding" style="background: var(--bg-darker); padding-top: 15px; padding-bottom: 20px;">
+    <section id="testimonials" class="section-padding" style="background: transparent; padding-top: 15px; padding-bottom: 20px;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 40px;">
                 <h4 class="text-gradient">CLIENT FEEDBACK</h4>
@@ -406,40 +423,49 @@
             </div>
         </div>
         
-        <div class="testimonial-slider-container">
-            <div class="testimonial-slider">
-                <div class="testimonial-card">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation just keep on delivering impressive results. Their knowledge of digital marketing helps us stay ahead."</p>
-                    <div class="client-info"><h5>Jefferson Wambua</h5><span>CEO, Compufix Technologies (Kenya)</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation was able to understand our complex requirements and build a cloud solution for customers worldwide."</p>
-                    <div class="client-info"><h5>Lee Mendoza</h5><span>CEO, JD Constructions (UK)</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation created a professional website to enhance my business image. I am in good digital hands."</p>
-                    <div class="client-info"><h5>Johnson Koh</h5><span>Founder, Inproved (Singapore)</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture's ERP system revolutionized our internal workflow. Highly professional and delivered ahead of schedule."</p>
-                    <div class="client-info"><h5>David Chen</h5><span>Operations Director, TechGlobal Solutions (USA)</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation just keep on delivering impressive results. Their knowledge of digital marketing helps us stay ahead."</p>
-                    <div class="client-info"><h5>Jefferson Wambua</h5><span>CEO, Compufix Technologies (Kenya)</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation was able to understand our complex requirements and build a cloud solution for customers worldwide."</p>
-                    <div class="client-info"><h5>Lee Mendoza</h5><span>CEO, JD Constructions (UK)</span></div>
-                </div>
-            </div>
-        </div>
+        <div class="testimonial-slider">
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation just keep on delivering impressive results. Their knowledge of digital marketing helps us stay ahead."</p>
+        <div class="client-info"><h5>Jefferson Wambua</h5><span>CEO, Compufix Technologies (Kenya)</span></div>
+    </div>
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation was able to understand our complex requirements and build a cloud solution for customers worldwide."</p>
+        <div class="client-info"><h5>Lee Mendoza</h5><span>CEO, JD Constructions (UK)</span></div>
+    </div>
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation created a professional website to enhance my business image. I am in good digital hands."</p>
+        <div class="client-info"><h5>Johnson Koh</h5><span>Founder, Inproved (Singapore)</span></div>
+    </div>
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture's ERP system revolutionized our internal workflow. Highly professional and delivered ahead of schedule."</p>
+        <div class="client-info"><h5>David Chen</h5><span>Operations Director, TechGlobal Solutions (USA)</span></div>
+    </div>
+
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation just keep on delivering impressive results. Their knowledge of digital marketing helps us stay ahead."</p>
+        <div class="client-info"><h5>Jefferson Wambua</h5><span>CEO, Compufix Technologies (Kenya)</span></div>
+    </div>
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation was able to understand our complex requirements and build a cloud solution for customers worldwide."</p>
+        <div class="client-info"><h5>Lee Mendoza</h5><span>CEO, JD Constructions (UK)</span></div>
+    </div>
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation created a professional website to enhance my business image. I am in good digital hands."</p>
+        <div class="client-info"><h5>Johnson Koh</h5><span>Founder, Inproved (Singapore)</span></div>
+    </div>
+    <div class="testimonial-card">
+        <i class="fas fa-quote-right quote-icon"></i>
+        <p class="text-muted" style="margin-bottom: 20px;">"IFuture's ERP system revolutionized our internal workflow. Highly professional and delivered ahead of schedule."</p>
+        <div class="client-info"><h5>David Chen</h5><span>Operations Director, TechGlobal Solutions (USA)</span></div>
+    </div>
+</div>
     </section>
 
     <section id="team" class="section-padding" style="padding-top: 20px;">
@@ -480,13 +506,17 @@
                 </div>
 
                 <div class="reveal">
-                    <form action="#" class="card" style="border: 1px solid #334155;">
-                        <h3 style="margin-bottom: 20px;">Send a Message</h3>
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <textarea rows="5" placeholder="Your Message" required></textarea>
-                        <button class="btn btn-primary" style="width: 100%;">Submit Request</button>
-                    </form>
+                   <form action="https://formspree.io/f/manrzeaw" method="POST" class="card" style="border: 1px solid #334155;">
+                    <h3 style="margin-bottom: 20px;">Send a Message</h3>
+    
+                    <input type="text" name="name" placeholder="Your Name" required>
+    
+                    <input type="email" name="email" placeholder="Your Email" required>
+    
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                </form>
                 </div>
             </div>
         </div>
