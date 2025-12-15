@@ -3,34 +3,1334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Interactive Website</title>
+    <title>IFuture Corporation | Delivering Excellence</title>
+    <meta name="description" content="IFUTURE CORPORATION - Premium software and web development services.">
+
+    <!-- Performance & SEO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Better social preview -->
+    <meta property="og:title" content="IFuture Corporation | Delivering Excellence">
+    <meta property="og:description" content="Premium software, automation & web development services.">
+    <meta property="og:type" content="website">
+
     
-    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        /* ===== FIXED BACKGROUND PARALLAX ===== */
+
+/* Add this new class for the image */
+.nav-logo-img {
+    height: 45px; /* Adjust height to fit your navbar */
+    width: auto;  /* Maintains aspect ratio */
+    object-fit: contain;
+    border-radius: 6px; /* Optional: adds slightly rounded corners */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  z-index: 0; /* 🔥 FIX: was negative or wrong */
+
+  background-image:
+    linear-gradient(
+      rgba(2, 6, 23, 0.88),
+      rgba(2, 6, 23, 0.88)
+    ),
+    url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+
+
+        /* --- VARIABLES & RESET --- */
+       :root {
+    /* Updated Background to match the deep tint of the logo */
+    --bg-dark: #0B1116;       /* Darker, closer to the logo background */
+    --bg-card: #151b23;       /* Slightly lighter for cards */
+    --bg-darker: #010409;     /* Deep black for contrast */
+
+    /* Updated to match the Logo's Electric Blue */
+    --primary: #00A3FF;       /* Changed from Teal to Logo Blue */
+    --primary-glow: rgba(0, 163, 255, 0.4);
+
+    /* Updated to match the Logo's Neon Orange */
+    --accent: #FF6B00;        /* Changed from standard orange to Logo Orange */
+    --accent-glow: rgba(255, 107, 0, 0.4);
+
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --font-main: 'Outfit', sans-serif;
+    --font-tech: 'Space Grotesk', sans-serif;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-tech);
+            color: white;
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { width: 100%; display: block; }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+    width: 100%;
+    max-width: 1200px; /* Crucial for keeping image proportions healthy */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+        .section-padding { padding: 1000px 0; }
+        
+        .text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background-clip: text;              /* standard */
+  -webkit-background-clip: text;      /* chrome/safari */
+  -webkit-text-fill-color: transparent;
+  color: transparent;                 /* fallback */
+  font-weight: bold;
+}
+
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-darker);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--primary-glow);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: 0.4s;
+            background: rgba(12, 23, 49, 0.1);
+        }
+
+        header.scrolled {
+            background: rgba(12, 27, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Update the existing .logo class to use Flexbox */
+.logo {
+    display: flex;           /* Aligns image and text side-by-side */
+    align-items: center;     /* Centers them vertically */
+    gap: 15px;               /* Adds space between the logo and text */
+    
+    /* Keep your existing font settings */
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: var(--font-tech);
+    color: white;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+.logo span { 
+    color: var(--primary); 
+}
+
+        nav ul { display: flex; gap: 30px; }
+        
+        nav a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: white; }
+        nav a:hover::after { width: 100%; }
+
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO --- */
+
+       .hero {
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* <--- ADD THIS: Moves content box to middle */
+  position: relative;
+}
+
+
+.hero::before {
+  background: transparent;
+}
+        .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px; /* Increased slightly for better balance */
+    text-align: center; /* <--- ADD THIS: Centers the text */
+    display: flex;      /* <--- ADD THIS */
+    flex-direction: column; /* <--- ADD THIS */
+    align-items: center;    /* <--- ADD THIS: Centers the buttons */
+}
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .typewriter span {
+            color: var(--primary);
+            border-right: 3px solid var(--accent);
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        /* --- CARDS & SERVICES --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* ---------------------------------------------------- */
+        /* --- CORE CHANGE: 3D TRANSFORM STYLES --- */
+        /* ---------------------------------------------------- */
+        .service-grid {
+            /* Create a 3D context for all children */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            perspective: 1000px; /* Perspective for the 3D effect */
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease-out; /* Slower transition for a smoother 3D effect */
+            position: relative;
+            overflow: hidden;
+            /* Enable transforms */
+            transform-style: preserve-3d; 
+            will-change: transform, box-shadow;
+        }
+        
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+            z-index: 10;
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: 0.3s;
+        }
+
+        .card:hover i {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .card h3 { margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+        /* ---------------------------------------------------- */
+
+
+        /* --- STATS SECTION --- */
+        .stats {
+            background: linear-gradient(to right, var(--bg-darker), var(--bg-card));
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: var(--font-tech);
+            display: block;
+        }
+        .stat-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
+
+        /* --- TEAM --- */
+.team-img {
+    width: 100%;
+    height: 450px;          /* Taller box gives the photo room to breathe */
+    object-fit: cover;      /* Ensures no stretching */
+    object-position: top; /* Centers the image naturally in the new, bigger box */
+    display: block;
+    filter: grayscale(100%);
+    transition: 0.4s;
+}
+
+
+.team-card:hover .team-img { filter: grayscale(0%); }
+
+        .team-info { padding: 25px; }
+        .team-role { color: var(--accent); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .text-muted { color: var(--text-muted); }
+
+        /* --- TESTIMONIALS (MARQUEE EFFECT) --- */
+        .testimonial-slider-container {
+            overflow: hidden;
+            width: 100%;
+            padding: 40px 0;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            gap: 20px;                 /* reduced gap */
+            animation: marquee 22s linear infinite; /* faster */
+        }
+
+        .testimonial-slider:hover {
+            animation-play-state: paused; /* Pause on hover */
+        }
+        
+        @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-60%);
+        }
+
+        
+}
+                
+        .testimonial-card {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            border-left: 4px solid var(--primary);
+            flex-shrink: 0; /* Prevents cards from shrinking */
+            width: 340px; /* Fixed width for consistent scrolling */
+            margin-right: 0;
+        }
+        
+        .quote-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+        .client-info h5 { margin: 0; font-size: 1.1rem; }
+        .client-info span { font-size: 0.85rem; color: var(--text-muted); }
+
+
+        /* --- CONTACT --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .contact-detail { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(43, 205, 193, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            background: var(--bg-darker);
+            border: 1px solid #334155;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 20px;
+            font-family: inherit;
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(43, 205, 193, 0.2);
+        }
+
+        /* --- FOOTER --- */
+        /* --- FOOTER FIX --- */
+footer {
+    background: var(--bg-darker);
+    padding: 50px 0 20px;
+    text-align: center;
+    border-top: 1px solid #1e293b;
+    
+    /* ADD THESE 2 LINES TO MAKE IT VISIBLE */
+    position: relative; 
+    z-index: 100;       
+}
+        .footer-logo { font-size: 2rem; font-weight: bold; color: white; margin-bottom: 20px; display: inline-block; }
+        .footer-logo span { color: var(--primary); }
+        .copyright { color: var(--text-muted); font-size: 0.9rem; margin-top: 20px; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .contact-container { grid-template-columns: 1fr; }
+            .nav-wrapper nav { display: none; }
+            .hamburger { display: block; }
+            .testimonial-card { width: 90vw; } /* Adjusted size for mobile screens */
+            /* Disable 3D effect on mobile for performance/usability */
+            .card:hover { transform: translateY(-10px) !important; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); }
+        }
+
+        /* ===== INTERACTION ENHANCEMENTS ===== */
+
+        /* Smooth everything */
+        * {
+            transition: background-color .3s ease, color .3s ease, transform .3s ease, box-shadow .3s ease;
+        }
+
+        /* Card glow + lift */
+        .card:hover { 
+            transform: translateY(-12px) scale(1.02);
+            box-shadow:
+            0 25px 60px rgba(0,0,0,0.7),
+            0 0 35px rgba(43,205,193,0.25);
+        }
+
+        /* Service icon pulse */
+        .card i {
+            filter: drop-shadow(0 0 0 transparent);
+        }
+        .card:hover i {
+            filter: drop-shadow(0 0 12px rgba(43,205,193,.7));
+        }
+
+        /* Button energy */
+        .btn-primary::after {
+            content:"";
+            position:absolute;
+            inset:0;
+            border-radius:50px;
+            background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+            transform:translateX(-120%);
+        }
+        .btn-primary:hover::after {
+            transform:translateX(120%);
+        }
+
+        /* Hero breathing effect */
+        .hero-content {
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+        @keyframes heroFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Navbar hover glow */
+        nav a:hover {
+            text-shadow: 0 0 10px rgba(43,205,193,.6);
+        }
+
+        /* Team image depth */
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.03);
+        }
+
+        /* Testimonial glass feel */
+        .testimonial-card {
+            backdrop-filter: blur(12px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Subtle background noise (premium feel) */
+        body::after {
+            content:"";
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            background:url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+            opacity:.03;
+            z-index:9999;
+        }
+
+        /* Smooth scrolling & GPU hints */
+html {
+  scroll-padding-top: 100px;
+}
+
+.card,
+.hero-content,
+.team-card,
+.testimonial-card {
+  will-change: transform;
+}
+
+/* Reduce animation jank on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+/* ===== SCROLL DEPTH POLISH ===== */
+
+/* Gentle depth for major sections */
+.hero,
+.section,
+.stats {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Section separator glow (very subtle) */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 80%;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(43,205,193,0.25),
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* Softer text rendering (premium feel) */
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Slight depth on section headings */
+.section h2 {
+  text-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+/* ===== MAGNETIC POLISH (SAFE) ===== */
+.card {
+  transition:
+    transform 0.25s ease-out,
+    box-shadow 0.25s ease-out;
+}
+
+@media (hover: none) {
+  .card {
+    transform: none !important;
+  }
+}
+
+body {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- MOBILE HEADER CLEANUP --- */
+@media (max-width: 768px) {
+    
+    /* 1. CONTAINER: Give it breathing room */
+    .nav-wrapper {
+        padding: 0 15px; /* Adds space from the edges */
+    }
+
+    /* 2. IMAGE: Force crop to show ICON ONLY */
+    .nav-logo-icon {
+        height: 38px !important;    /* Perfect mobile height */
+        width: 38px !important;     /* Force square */
+        object-fit: cover !important;
+        object-position: 0% 50% !important; /* Locks onto the left side (Icon) */
+        margin-right: 8px !important;
+    }
+
+    /* 3. TEXT: Make it sleek */
+    .logo {
+        font-size: 1.4rem !important;
+        letter-spacing: -0.5px;
+    }
+
+    /* 4. HIDE "CORPORATION": The magic step for clean design */
+    .logo span {
+        display: none !important; /* Hides the orange 'CORP.' text on mobile */
+    }
+    
+    /* 5. Ensure Hamburger is visible and aligned */
+    .hamburger {
+        font-size: 1.6rem;
+        padding: 5px;
+    }
+}
+.section-padding {
+  padding: 100px 0;
+}
+
+/* Remove gap between Services and Testimonials */
+#services {
+  padding-bottom: 20px;
+}
+
+#testimonials {
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+#team {
+  padding-top: 20px;
+}
+
+/* Add this to the very bottom of your CSS */
+@media (min-width: 1920px) {
+    html {
+        font-size: 18px; /* Increases base size from default 16px */
+    }
+    .container {
+        max-width: 1600px; /* Allows slightly wider layout on huge screens */
+    }
+}
+
+/* ADD THIS AT THE VERY BOTTOM OF YOUR CSS */
+
+@media (min-width: 1600px) {
+    body {
+        zoom: 1.1; /* This equals 110% zoom */
+    }
+}
+
+@media (min-width: 2000px) {
+    body {
+        zoom: 1.25; /* Even bigger zoom (125%) for huge 4K screens */
+    }
+}
+
+/* --- MOBILE LOGO FIX --- */
+@media (max-width: 768px) {
+    /* 1. Shrink the text size */
+    .logo {
+        font-size: 1.3rem !important; /* Smaller text for mobile */
+        gap: 8px; /* Reduce space between icon and text */
+    }
+
+    /* 2. Shrink the icon size */
+    .nav-logo-icon {
+        height: 32px; /* Smaller icon height */
+        margin-right: 5px;
+    }
+
+    /* 3. Optional: Hide 'CORPORATION' on very small screens if it still breaks */
+    /* Uncomment the lines below if you want shorter text on mobile */
+    /* .logo div span {
+        display: none;
+    }
+    .logo div::after {
+        content: " CORP."; 
+        color: var(--accent);
+    } 
+    */
+}
+
+    </style>
 </head>
+
+<script>
+/* Cursor parallax for hero */
+document.addEventListener("mousemove", e => {
+  const hero = document.querySelector(".hero-content");
+  if(!hero) return;
+  const x = (window.innerWidth / 2 - e.clientX) / 60;
+  const y = (window.innerHeight / 2 - e.clientY) / 60;
+  hero.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+/* Button click feedback */
+document.querySelectorAll(".btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    btn.style.transform="scale(0.95)";
+    setTimeout(()=>btn.style.transform="",150);
+  });
+});
+</script>
+
+<script>
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty('--x', `${e.clientX - rect.left}px`);
+    btn.style.setProperty('--y', `${e.clientY - rect.top}px`);
+  });
+});
+</script>
+
+<script>
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    if (pageYOffset >= section.offsetTop - 120) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+
+<script>
+/* Subtle hero parallax on scroll */
+const heroContent = document.querySelector(".hero-content");
+
+window.addEventListener("scroll", () => {
+  if (!heroContent) return;
+
+  const scrollY = window.scrollY;
+  heroContent.style.transform =
+    `translateY(${scrollY * 0.08}px)`;
+});
+</script>
+
+<script>
+/* Card depth while scrolling */
+const depthCards = document.querySelectorAll(".card");
+
+window.addEventListener("scroll", () => {
+  const trigger = window.innerHeight * 0.85;
+
+  depthCards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top < trigger) {
+      card.style.transform = "translateY(0)";
+      card.style.opacity = "1";
+    }
+  });
+});
+</script>
+
+<script>
+/* Magnetic cards – subtle premium interaction */
+const magneticCards = document.querySelectorAll(".card");
+
+magneticCards.forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const moveX = (x / rect.width) * 10;
+    const moveY = (y / rect.height) * 10;
+
+    card.style.transform =
+      `translate(${moveX}px, ${moveY}px) scale(1.02)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "translate(0, 0) scale(1)";
+  });
+});
+</script>
+
+
 <body>
 
-    <header id="page-header">
-        <h1>My Responsive Page Demo</h1>
+    <header id="header">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+    <img src="portfolio/logo.png" alt="IFuture Logo" class="nav-logo-img">
+    <div>IFUTURE <span>CORPORATION</span></div>
+</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <i class="fas fa-bars hamburger"></i>
+        </div>
     </header>
 
-    <div class="page-grid">
+    <section class="hero">
+        <div class="container hero-content">
+            <h4 class="text-gradient">WELCOME TO THE FUTURE</h4>
+            <h1>Delivering <br><span class="typewriter">Excellence</span></h1>
+            <p>We are a digital studio and development centre from North India. We build unique, scalable, enterprise-grade software products designed to make complex business processes simple.</p>
+            <div style="margin-top: 30px;">
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="#contact" class="btn btn-outline" style="margin-left: 15px;">Get Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding reveal">
+        <div class="container">
+            <div class="grid-3">
+                <div style="grid-column: span 2;">
+                    <h4 class="text-gradient">WHO WE ARE</h4>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Structured Planning. Quick Response.</h2>
+                    <p class="text-muted" style="margin-bottom: 20px;">Founded in 2011, IFuture is one of the fastest growing IT organizations. We are continuously serving our clients in full swing, achieving ethical goals and building long-term relationships.</p>
+                    <ul style="color: var(--text-muted); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 10px;"></i> Respond to emails within 4 hours</li>
+                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 10px;"></i> Best E-Commerce solutions & Market Stats</li>
+                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 10px;"></i> No charges for consultancy and discussion</li>
+                    </ul>
+                </div>
+                <div id="skills" class="card" style="background: var(--bg-darker);">
+                    <h3>Our Core Skills</h3>
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom:5px; display:flex; justify-content:space-between; color:white;"><span>Web Development</span> <span>90%</span></p>
+                        <div style="height:6px; background:#334155; border-radius:3px; margin-bottom:15px;"><div style="width:90%; height:100%; background:var(--primary); border-radius:3px;"></div></div>
+
+                        <p style="margin-bottom:5px; display:flex; justify-content:space-between; color:white;"><span>Scrapers / Automation</span> <span>95%</span></p>
+                        <div style="height:6px; background:#334155; border-radius:3px; margin-bottom:15px;"><div style="width:95%; height:100%; background:var(--accent); border-radius:3px;"></div></div>
+
+                        <p style="margin-bottom:5px; display:flex; justify-content:space-between; color:white;"><span>SEO / Marketing</span> <span>60%</span></p>
+                        <div style="height:6px; background:#334155; border-radius:3px;"><div style="width:60%; height:100%; background:var(--accent); border-radius:3px;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding stats reveal">
+        <div class="container grid-3" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="stat-item">
+                <span class="stat-number" data-target="2753">0</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="2510">0</span>
+                <span class="stat-label">Projects Done</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="43753">0</span>
+                <span class="stat-label">Tickets Solved</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="45105">0</span>
+                <span class="stat-label">Dev Hours</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h4 class="text-gradient">WHAT WE DO</h4>
+                <h2>Our Premium Services</h2>
+            </div>
+            
+            <div class="service-grid">
+                <div class="card service-card reveal">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Experience operational efficiencies. We build customized software and websites saving countless hours for your staff and customers.</p>
+                </div>
+                <div class="card service-card reveal">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Digital Marketing</h3>
+                    <p>SEO and SMO experts ensuring your site’s visibility. Sending newsletters and marketing mails to target the right customer.</p>
+                </div>
+                <div class="card service-card reveal">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Graphic Design</h3>
+                    <p>Creative design solutions. From logos to complete brand identity, we make your business look professional and modern.</p>
+                </div>
+                <div class="card service-card reveal">
+                    <i class="fas fa-database"></i>
+                    <h3>Scrapers & ERP</h3>
+                    <p>Custom data scrapers, Office Automation, and ERP systems designed to handle complex data and streamline operations.</p>
+                </div>
+                <div class="card service-card reveal">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>App Development</h3>
+                    <p>Native and hybrid mobile application development services to keep your business accessible on the go.</p>
+                </div>
+                <div class="card service-card reveal">
+                    <i class="fas fa-headset"></i>
+                    <h3>IT Consultancy</h3>
+                    <p>We love giving the right piece of advice. No charges for consultancy. Talk to us and explore your options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="section-padding" style="background: var(--bg-darker);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h4 class="text-gradient">CLIENT FEEDBACK</h4>
+                <h2>Trusted by Clients Globally</h2>
+            </div>
+        </div>
         
-        <aside id="sidebar">
-            <h3>Sidebar Menu</h3>
-            <a href="#">Sidebar Link</a>
-        </aside>
+        <div class="testimonial-slider-container">
+            <div class="testimonial-slider">
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation just keep on delivering impressive results. Their knowledge of digital marketing helps us stay ahead."</p>
+                    <div class="client-info">
+                        <h5>Jefferson Wambua</h5>
+                        <span>CEO, Compufix Technologies (Kenya)</span>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation was able to understand our complex requirements and build a cloud solution for customers worldwide."</p>
+                    <div class="client-info">
+                        <h5>Lee Mendoza</h5>
+                        <span>CEO, JD Constructions (UK)</span>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation created a professional website to enhance my business image. I am in good digital hands."</p>
+                    <div class="client-info">
+                        <h5>Johnson Koh</h5>
+                        <span>Founder, Inproved (Singapore)</span>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture's ERP system revolutionized our internal workflow. Highly professional and delivered ahead of schedule."</p>
+                    <div class="client-info">
+                        <h5>David Chen</h5>
+                        <span>Operations Director, TechGlobal Solutions (USA)</span>
+                    </div>
+                </div>
 
-        <main id="main-content">
-            <h2>Main Content Area</h2>
-            <p>This space will stretch to fit the remaining page width.</p>
-        </main>
-    </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation just keep on delivering impressive results. Their knowledge of digital marketing helps us stay ahead."</p>
+                    <div class="client-info">
+                        <h5>Jefferson Wambua</h5>
+                        <span>CEO, Compufix Technologies (Kenya)</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation was able to understand our complex requirements and build a cloud solution for customers worldwide."</p>
+                    <div class="client-info">
+                        <h5>Lee Mendoza</h5>
+                        <span>CEO, JD Constructions (UK)</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture Corporation created a professional website to enhance my business image. I am in good digital hands."</p>
+                    <div class="client-info">
+                        <h5>Johnson Koh</h5>
+                        <span>Founder, Inproved (Singapore)</span>
+                    </div>
+                </div>
+                 <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="text-muted" style="margin-bottom: 20px;">"IFuture's ERP system revolutionized our internal workflow. Highly professional and delivered ahead of schedule."</p>
+                    <div class="client-info">
+                        <h5>David Chen</h5>
+                        <span>Operations Director, TechGlobal Solutions (USA)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer id="page-footer">
-        <p>Page Footer</p>
+    <section id="team" class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h4 class="text-gradient">THE BRAINS</h4>
+                <h2>Meet The Team</h2>
+            </div>
+            
+            <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="team-card reveal">
+                    <img src="portfolio/Rajiv.jpg" class="team-img" alt="Rajiv">
+                    <div class="team-info">
+                        <h3>Rajiv</h3>
+                        <span class="team-role">Managing Director</span>
+                        <p class="text-muted">20+ years managing global companies in Africa, Asia and Europe.</p>
+                    </div>
+                </div>
+                <div class="team-card reveal">
+                    <img src="portfolio/s.jpg" class="team-img" alt="Lokesh">
+                    <div class="team-info">
+                        <h3>Shivam Kumar</h3>
+                        <span class="team-role">Lead Designer</span>
+                        <p class="text-muted">12+ years experience. The building block of IFuture Corporation.</p>
+                    </div>
+                </div>
+                <div class="team-card reveal">
+                    <img src="portfolio/A.jpg" class="team-img" alt="Andrew">
+                    <div class="team-info">
+                        <h3>Arnav Tyagi</h3>
+                        <span class="team-role">Sales Manager (Australia)</span>
+                        <p class="text-muted">Marketing expert. Responds to clients in under 15 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info reveal">
+                    <h4 class="text-gradient">GET IN TOUCH</h4>
+                    <h2>Let's Build Something Great</h2>
+                    <p class="text-muted" style="margin-bottom:40px;">Please get in touch with us and our representative will get back to you in less than 6 hours.</p>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h5>Head Office</h5>
+                            <p class="text-muted">#301 Vanatian Towers, Adj. Sector 20 Panchkula</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h5>Phone</h5>
+                            <p class="text-muted">01762-405-301 | +91-971-973-2070</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h5>Email</h5>
+                            <p class="text-muted">info@ifuturecorporation.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <form action="#" class="card" style="border: 1px solid #334155;">
+                        <h3 style="margin-bottom: 20px;">Send a Message</h3>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                        <button class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">IFUTURE <span>CORPORATION</span></a>
+            <p class="text-muted" style="max-width: 500px; margin: 0 auto 20px;">
+                Delivering excellence in web development, scraping, and digital solutions since 2011.
+            </p>
+            <p class="copyright">© 2011-2025 IFuture Corporation. All Rights Reserved. | <a href="#" class="text-muted">Privacy Policy</a></p>
+        </div>
     </footer>
 
-    <script src="script.js"></script> 
+    <script>
+        // 1. Sticky Header Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Scroll Animation (Fade Up)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counters if Stats section is visible
+                    if (entry.target.classList.contains('stats')) {
+                        runCounters();
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 3. Counter Animation
+        let countersRun = false;
+        function runCounters() {
+            if(countersRun) return;
+            countersRun = true;
+            
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const speed = 200; // The lower the slower
+                
+                const updateCount = () => {
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+        
+        // 4. Typewriter Effect
+        const typewriterElement = document.querySelector('.typewriter span');
+        const phrases = ["Excellence", "Digital Solutions", "Innovation", "Client Success"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            if (charIndex < currentPhrase.length) {
+                typewriterElement.textContent += currentPhrase.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            const currentPhrase = phrases[phraseIndex];
+            if (charIndex > 0) {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 50);
+            } else {
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 500);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typewriterElement) {
+                type();
+            }
+        });
+
+        // 5. Custom 3D Tilt Effect for Service Cards
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        serviceCards.forEach(card => {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+        });
+
+        function handleMouseMove(e) {
+            // Get card dimensions and position
+            const rect = this.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+
+            // Calculate mouse position relative to the center of the card (normalized from -0.5 to 0.5)
+            const x = (e.clientX - rect.left) / width - 0.5;
+            const y = (e.clientY - rect.top) / height - 0.5;
+
+            // Define the maximum rotation (in degrees) and translation (in pixels)
+            const maxRotation = 10;
+            const maxTranslation = 15;
+
+            // Calculate rotation values. Tilt the card away from the cursor.
+            const rotateX = -y * maxRotation; // Tilt up/down (X-axis rotation)
+            const rotateY = x * maxRotation;  // Tilt left/right (Y-axis rotation)
+
+            // Calculate the zoom/shift effect (translateZ)
+            const translateZ = maxTranslation;
+
+            // Apply the transform to the card
+            this.style.transform = `
+                scale(1.03) /* Slight zoom effect */
+                translateZ(${translateZ}px) 
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg)
+            `;
+            
+            this.style.boxShadow = `
+                ${-x * 40}px ${-y * 40}px 70px rgba(0, 0, 0, 0.7) /* Dynamic shadow based on tilt */
+            `;
+        }
+
+        function handleMouseLeave() {
+            // Reset the card transform and shadow when the mouse leaves
+            this.style.transform = `scale(1) translateZ(0) rotateX(0deg) rotateY(0deg)`;
+            this.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.4)';
+        }
+    </script>
+
+     <script>
+         (function (i, s, o, g, r, a, m) {
+             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                 (i[r].q = i[r].q || []).push(arguments)
+             }, i[r].l = 1 * new Date(); a = s.createElement(o),
+       m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+         ga('create', 'UA-65031987-1', 'auto');
+         ga('send', 'pageview');
+
+    </script>
 </body>
+
+
 </html>
